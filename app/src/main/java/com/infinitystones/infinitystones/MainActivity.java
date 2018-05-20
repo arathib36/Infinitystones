@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     String [] items = new String[100];
     int arr[]={0,0,0,0,0,0};
-    int i=0,j,k,t=0;
+    int i=-1,j,k,t=0,ch,temp=0;
     String strText = "\n";
 
     Button stone,rst,list;
@@ -56,11 +56,24 @@ public class MainActivity extends AppCompatActivity {
         stone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 k = r.nextInt(mStonesLength);
                 rslt.setText(mStones.getStones(k));
-                items[i] = mStones.getitems(k);
+                temp=0;
+                for(ch=0;ch<=i;ch++)
+                {
+                    if (items[ch].equals(mStones.getitems(k))) {
+                        temp++;
+                        break;
+                    }
+                }
+
+                if(ch==-1||temp==0)
+                {items[++i] = mStones.getitems(k);
+                    writ(items[i]);}
+
                 stone.setBackgroundColor((Color.parseColor(mStones.getcolor(k))));
-                writ(items[i]);
+
 
                 arr[k]++;
 
@@ -77,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 {t=0;}
 
 
-                i++;
+
             }
 
         });
@@ -117,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             }
         for (j = 0; j < 6; j++)
         {arr[j]=0;}
-        i=0;
+        i=-1;
 
         String filenam="Thanos";
         try {
